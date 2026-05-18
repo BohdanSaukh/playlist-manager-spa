@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List - Playlist Manager</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">Playlist Manager</div>
+            <ul class="nav-links">
+                <li><a href="playlists.html">Playlists</a></li>
+                <li><a href="users.html" class="active">Users</a></li>
+                <li><a href="../index.html" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="users-section">
+            <div class="section-header">
+                <h2>Users Management</h2>
+                <a href="create-user.html" class="btn btn-primary">Create New User</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>bohdan_admin</td>
+                            <td><span class="badge badge-admin">Admin</span></td>
+                            <td class="actions">
+                                <a href="user-info.html" class="btn btn-icon">👁️</a>
+                                <a href="edit-user.html" class="btn btn-icon">✏️</a>
+                                <button class="btn btn-icon btn-danger">🗑️</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>john_doe</td>
+                            <td><span class="badge badge-regular">Regular</span></td>
+                            <td class="actions">
+                                <a href="user-info.html" class="btn btn-icon">👁️</a>
+                                <a href="edit-user.html" class="btn btn-icon">✏️</a>
+                                <button class="btn btn-icon btn-danger">🗑️</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
