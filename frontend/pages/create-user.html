@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User - Playlist Manager</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">Playlist Manager</div>
+            <ul class="nav-links">
+                <li><a href="playlists.html">Playlists</a></li>
+                <li><a href="users.html" class="active">Users</a></li>
+                <li><a href="../index.html" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="form-section">
+            <h2>Create New User</h2>
+            
+            <div class="alert alert-danger">
+                Please fix the validation errors below.
+            </div>
+
+            <form action="users.html" class="custom-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="input-error" required>
+                    <span class="error-text">Username must be at least 4 characters long.</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="regular">Regular</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Ok</button>
+                    <a href="users.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists - Playlist Manager</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="logo">Playlist Manager</div>
+            <ul class="nav-links">
+                <li><a href="playlists.html" class="active">Playlists</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li><a href="../index.html" class="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="playlists-section">
+            <div class="section-header">
+                <h2>My & Public Playlists</h2>
+                <a href="create-playlist.html" class="btn btn-primary">Create Playlist</a>
+            </div>
+
+            <div class="grid-container">
+                <article class="card">
+                    <div class="card-header">
+                        <h3>Rock Classics</h3>
+                        <span class="badge badge-public">Public</span>
+                    </div>
+                    <div class="card-body">
+                        <p>15 tracks</p>
+                        <p>Owner: john_doe</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-secondary">View</a>
+                        <a href="#" class="btn btn-primary">Edit</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-header">
+                        <h3>Workout Mix</h3>
+                        <span class="badge badge-private">Private</span>
+                    </div>
+                    <div class="card-body">
+                        <p>8 tracks</p>
+                        <p>Owner: bohdan_admin (You)</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-secondary">View</a>
+                        <a href="#" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-danger">Delete</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
