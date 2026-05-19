@@ -14,3 +14,14 @@ export const createPlaylist = (playlistData) => fetch(`${API_BASE}/playlists`, {
 export const deletePlaylist = (playlistId, currentUserId) => fetch(`${API_BASE}/playlists/${playlistId}?current_user_id=${currentUserId}`, {
     method: 'DELETE',
 }).then((res) => res.json());
+
+export const updatePlaylist = (playlistId, playlistData, currentUserId) => fetch(`${API_BASE}/playlists/${playlistId}?current_user_id=${currentUserId}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(playlistData),
+}).then((res) => {
+    if (!res.ok) throw new Error('Forbidden');
+    return res.json();
+});
