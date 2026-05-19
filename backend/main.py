@@ -1,7 +1,7 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List
 
 app = FastAPI()
 
@@ -17,6 +17,32 @@ class User(BaseModel):
     id: int
     username: str
     role: str
+
+class ConnectionManager:
+    def __init__(self):
+        self.active_connections: List[WebSocket] = []
+
+    async def connect(self, websocket: WebSocket):
+        await websocket.accept()
+        self.active_connections.append(websocket)
+
+    def disconnect(self, websocket: WebSocket):
+        self.active_connections.remove(websocket)
+
+    async def broadcast(self, message: str):
+        for connection in self.active_connections:
+            await connection.send_text(message)
+
+manager = ConnectionManager()
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    await manager.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
 
 class Playlist(BaseModel):
     id: int
@@ -42,15 +68,20 @@ def create_playlist(playlist: Playlist):
     playlists_db.append(playlist)
     return playlist
 
-@app.put("/playlists/{playlist_id}", response_model = Playlist)
-def update_playlist(playlist_id: int, updated_data: Playlist, current_user_id: int):
+@app.put("/playlists/{playlist_id}", response_model=Playlist)
+async def update_playlist(playlist_id: int, updated_data: Playlist, current_user_id: int):
     for idx, p in enumerate(playlists_db):
         if p.id == playlist_id:
+            
             if p.is_public == False and p.owner_id != current_user_id:
-                raise HTTPException(status_code = 403, detail = "Forbidden")
+                raise HTTPException(status_code=403, detail="Forbidden")
+            
             playlists_db[idx] = updated_data
+            
+            await manager.broadcast(f"📢 Плейлист '{updated_data.name}' був щойно оновлений!")
+            
             return updated_data
-    raise HTTPException(status_code = 404, detail = "Not found")
+    raise HTTPException(status_code=404, detail="Not found")
 
 @app.delete("/playlists/{playlist_id}")
 def delete_playlist(playlist_id: int, current_user_id: int):
